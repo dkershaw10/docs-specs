@@ -2,7 +2,9 @@
 
 This topic describes a series of best practices that can help your apps get the best out of Microsoft Graph - whether that's through best ways to learn about using Microsoft Graph, performance improvements, or making your app more reliable for end-users.
 
-SHOULD WE LIST THE SET OF BEST PRACTICES, OR RELY ON THE AUTO-GENERATED "IN THIS ARTICLE" TOC?
+SHOULD WE LIST THE SET OF BEST PRACTICES, OR RELY ON THE AUTO-GENERATED "IN THIS ARTICLE" TOC? Adam/Ayuba say use automated ToC
+
+ANOTHER TOPIC: App registration best practices and key management best practices.  Not specific to Graph, but...
 
 ## Learning about Microsoft Graph
 
@@ -74,6 +76,8 @@ While your application should handle all error responses (in the 400 and 500 ran
 |Throttling|429|APIs may throttle at any time for a variety of reasons, so your application must **always** be prepared to handle 429 responses. This error response includes the *Retry-After* field in the HTTP response header. Backing off requests using the *Retry-After* delay is the fastest way to recover from throttling.| [Throttling](throttling.md) |
 |Service unavailable| 503 | This is likely because the services is busy. You should employ a back-off strategy similar to 429. Additionally, you should always make new retry requests over a new HTTP connection.|| 
 
+FOLLOW UP ON BEHAVIORS AROUND LACK OF SUBSCRIPTION OR LICENSE.
+
 ### Evolvable enums
 
 TBD
@@ -124,7 +128,7 @@ Webhooks and delta query are often used better together, because if you use delt
 
 ### Batching
 
-JSON batching allows you to optimize your application by combining multiple requests into a single JSON object. Combining individual requests into a single batch request can save the application significant network latency.
+JSON batching allows you to optimize your application by combining multiple requests into a single JSON object. Combining individual requests into a single batch request can save the application significant network latency and can conserve connection resources.
 
 > Use [batching](json_batching) where significant network latency can have a big impact on the performance.
 
@@ -136,8 +140,8 @@ To minimize network traffic, it's recommended that applications request that res
 
 ## Reliability and support
 
-1.	Honor DNS TTL and set connection TTL to match it. This ensures availability in case of failovers
+1. Honor DNS TTL and set connection TTL to match it. This ensures availability in case of failovers.
 
-2.	Open connections to all advertised DNS answers.
+2. Open connections to all advertised DNS answers.
 
-3.	Always log the *request-id* and *timestamp* from the HTTP response header. This is required when escalating issues or reporting issues in StackOverflow or to Microsoft Customer Support.
+3. Always log the *request-id* and *timestamp* from the HTTP response header. This is required when escalating issues or reporting issues in StackOverflow or to Microsoft Customer Support.
